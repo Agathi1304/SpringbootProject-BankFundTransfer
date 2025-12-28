@@ -24,5 +24,29 @@ public class Account {
 	@Enumerated(EnumType.STRING)
 	private Accountype accountType;
 	
+	public int getAccountNumber() {
+		return accountNumber;
+	}
+
+	public void setAccountNumber(int accountNumber) {
+		this.accountNumber = accountNumber;
+	}
+
+	public Accountype getAccountType() {
+		return accountType;
+	}
+
+	public void setAccountType(Accountype accountType) {
+		this.accountType = accountType;
+	}
+
+	public double getBalance() {
+		return balance;
+	}
+
+	public void setBalance(double balance) {
+		this.balance = balance;
+	}
+
 	private double balance;
 }

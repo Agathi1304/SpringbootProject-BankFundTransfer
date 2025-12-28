@@ -9,8 +9,8 @@ import bank.entities.Account;
 public interface accountService {
 
 	ResponseEntity<Account> createAccount(Account account);
-	List<Account> getAllAccount ();
-	Account updateAccount(int accountId,Account account);
-	Account getAccount(int accountId);
-	Account deleteAccount(int accountId);
+//	List<Account> getAllAccount ();
+//	Account updateAccount(int accountId,Account account);
+//	Account getAccount(int accountId);
+//	Account deleteAccount(int accountId);
 }
