@@ -1,8 +1,16 @@
 package bank.controllers;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import bank.entities.Account;
@@ -17,31 +25,32 @@ public class AccountController  {
 		this.accountService=accountService;
 	}
 	
-	@PostMapping("/api/account")
+	@PostMapping("/api/account/create")
 	public ResponseEntity<Account> createAccount(@RequestBody Account account){
-	    System.out.println("Received Account: " + account);
+//	    System.out.println("Received Account: " + account);
 		return accountService.createAccount(account);		
 	}
 	
-//	@GetMapping("api/account")
-//	public List<Account> getAllAccount(){
-//		
-//	}
-//	
-//	@PutMapping("api/account/{account_id}")
-//	public Account updateAccount(@PathVariable int accountId,@RequestBody Account account) {
-//		
-//	}
-//	
-//	@RequestMapping(value="/api/account/{accountId}", method = RequestMethod.GET)
-//	public Account getAccount(@PathVariable int accountId) {
-//		
-//	}
-//	
-//	@DeleteMapping("/api/account/{accountId}")
-//	public Account deleteAccount(@PathVariable int aaccountId) {
-//		
-//	}
+	@GetMapping("/api/account/getAll")
+	public List<Account> getAllAccount(){
+		return accountService.getAllAccount();
+	}
+	
+	@PutMapping("/api/account/{accountId}")
+	public Account updateAccount(@PathVariable int accountId,@RequestBody Account account) {
+		
+		return accountService.updateAccount(accountId, account);
+	}
+	
+	@RequestMapping(value="/api/account/{accountId}", method = RequestMethod.GET)
+	public Account getAccount(@PathVariable int accountId) {
+		return accountService.getAccount(accountId);
+	}
+	
+	@DeleteMapping("/api/account/{accountId}")
+	public Account deleteAccount(@PathVariable int accountId) {
+		return accountService.deleteAccount(accountId);
+	}
 //	
 	/**
 	 * GetMapping,PostMapping,PutMapping,DeleteMapping.PutMApping are shortest way of http methods crestaion 
