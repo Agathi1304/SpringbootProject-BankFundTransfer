@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import bank.entities.Account;
+import bank.exception.TranscationExceptions;
 import bank.repository.AccountRepository;
 
 @Service
@@ -19,11 +20,17 @@ public class FundTransferService {
 		
 		
 		if(fromAcc==null || toAcc==null) 
-			return "Either source or destination account not found."; 
+			//return "Either source or destination account not found."; 
+			throw new TranscationExceptions("Either source or destination accounts are not found");
 		
 		
 		if(fromAcc.getBalance()<amount) {
-			return "Insufficient balance";
+			//return "Insufficient balance";
+			throw new TranscationExceptions("Insufficient Balance");
+		}
+		
+		if(fromAcc==toAcc) {
+			throw new TranscationExceptions("source and destination account cannot be same to prevent self transfer");
 		}
 		
 		fromAcc.setBalance(fromAcc.getBalance()-amount);

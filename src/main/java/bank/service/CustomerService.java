@@ -39,8 +39,7 @@ public class CustomerService implements customerService {
 		return customer;
 	}
 	
-	 @Override
-	 @Transactional
+	 
 	public Customer getCustomer(int customerId) {
 //		Customer customer = customerRepo.findById(customerId).orElse(null);
 //		if(customer!=null) return customer;
@@ -50,6 +49,8 @@ public class CustomerService implements customerService {
                 .orElseThrow(() -> new CustomerExceptions("Customer not found with ID: " + customerId));
 	}
 	
+	
+	 @Transactional
 	public Customer updateCustomer(Customer cust,int customerId) {
 //		Customer customer = customerRepo.findById(customerId).orElse(null);
 		

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import bank.exception.AccountExceptions;
 import bank.exception.CustomerExceptions;
+import bank.exception.TranscationExceptions;
 
 @RestControllerAdvice
 public class GlobalException {
@@ -23,7 +24,15 @@ public class GlobalException {
 	
 	@ExceptionHandler(AccountExceptions.class)
 	public ResponseEntity<CustomErrorResponse> handleAccountRelatedExceptions(AccountExceptions exception){
-		CustomErrorResponse error = new CustomErrorResponse("404","NotFoundException");
+		CustomErrorResponse error = new CustomErrorResponse("404",exception.getMessage());
+		error.setTimestamp(LocalDateTime.now());
+		error.setStatus(HttpStatus.NOT_FOUND.toString());
+		return new ResponseEntity<CustomErrorResponse>(error,HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler(TranscationExceptions.class)
+	public ResponseEntity<CustomErrorResponse> handleTranscationExcpetions(TranscationExceptions exception){
+		CustomErrorResponse error = new CustomErrorResponse("404",exception.getMessage());
 		error.setTimestamp(LocalDateTime.now());
 		error.setStatus(HttpStatus.NOT_FOUND.toString());
 		return new ResponseEntity<CustomErrorResponse>(error,HttpStatus.NOT_FOUND);
